@@ -1,9 +1,9 @@
 use image::{DynamicImage, imageops::FilterType};
 
 fn main() {
-    let path = "../../../Downloads/carrots1.webp";
+    let path1 = "../../../Downloads/test1.png";
 
-    let img = match image::open(path) {
+    let img1 = match image::open(path1) {
         Ok(img) => img,
         Err(e) => {
             eprintln!("Error: {}", e);
@@ -11,7 +11,23 @@ fn main() {
         }
     };
 
-    println!("{}", dhash(&img, true))
+    let dhash1 = dhash(&img1, true);
+
+    let path2 = "../../../Downloads/test4.png";
+
+    let img2 = match image::open(path2) {
+        Ok(img) => img,
+        Err(e) => {
+            eprintln!("Error: {}", e);
+            std::process::exit(1);
+        }
+    };
+
+    let dhash2 = dhash(&img2, true);
+
+    let dist = hamming_distance(dhash1, dhash2);
+
+    println!("{}%", (1.0 - dist as f64 / 64.0) * 100.0);
 }
 
 fn dhash(img: &DynamicImage, visualise: bool) -> u64 {
@@ -74,4 +90,8 @@ fn dhash(img: &DynamicImage, visualise: bool) -> u64 {
     }
 
     hash
+}
+
+fn hamming_distance(a: u64, b: u64) -> u32 {
+    (a ^ b).count_ones()
 }
