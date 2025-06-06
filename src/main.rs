@@ -1,6 +1,6 @@
 mod compare;
 mod hash;
-mod image_mutation;
+mod visualise;
 
 fn main() {
     let path1 = "../../../Downloads/test1.png";

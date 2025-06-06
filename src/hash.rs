@@ -1,15 +1,21 @@
-use crate::image_mutation;
-use image::DynamicImage;
+use crate::visualise;
+use image::{DynamicImage, GenericImageView, imageops::FilterType};
 
 pub fn dhash(img: &DynamicImage, visualise: bool) -> u64 {
     // Mutate image
-    let resized = image_mutation::resize_image(&img, visualise);
-    let gray = image_mutation::grayscale_image(&resized, visualise);
+    let resized = img.resize_exact(9, 8, FilterType::Lanczos3);
+    let gray = resized.grayscale();
+    if visualise {
+        println!("Squash:");
+        visualise::print_pixels(&resized);
+        println!("Grayscale:");
+        visualise::print_pixels(&gray);
+    }
 
     // Calculate hash
     let mut hash: u64 = 0;
     if visualise {
-        println!("dHashed Image:")
+        println!("dHash fingerprint:")
     }
     for y in 0..8 {
         for x in 0..8 {
