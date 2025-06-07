@@ -27,7 +27,7 @@ pub fn u64_fingerprint_display(fingerprint: &u64) -> String {
             let pixel = if bit == 1 { "█" } else { " " };
             disp.push_str(pixel);
         }
-        disp.push_str("\n");
+        disp.push('\n');
     }
 
     disp
