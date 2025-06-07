@@ -9,7 +9,7 @@ struct Cli {
     path1: String,
     path2: String,
 
-    #[arg(short, long)]
+    #[arg(short, long, help = "Display visualisations of image calculations")]
     visualise: bool,
 }
 
