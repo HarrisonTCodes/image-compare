@@ -15,8 +15,5 @@ struct Cli {
 
 fn main() {
     let cli = Cli::parse();
-    println!(
-        "{}%",
-        compare::compare_images(&cli.path1, &cli.path2, cli.visualise)
-    )
+    compare::compare_images(&cli.path1, &cli.path2, cli.visualise)
 }
