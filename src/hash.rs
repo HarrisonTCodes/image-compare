@@ -7,9 +7,9 @@ pub fn dhash(img: &DynamicImage, visualise: bool) -> u64 {
     let gray = resized.grayscale();
     if visualise {
         println!("Squash:");
-        visualise::print_pixels(&resized);
+        println!("{}", visualise::pixel_display(&resized));
         println!("Grayscale:");
-        visualise::print_pixels(&gray);
+        println!("{}", visualise::pixel_display(&gray));
     }
 
     // Calculate hash
