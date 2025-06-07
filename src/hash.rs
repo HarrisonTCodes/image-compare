@@ -6,10 +6,13 @@ pub fn dhash(img: &DynamicImage, visualise: bool) -> u64 {
     let resized = img.resize_exact(9, 8, FilterType::Lanczos3);
     let gray = resized.grayscale();
     if visualise {
-        println!("Squash:");
-        println!("{}", visualise::pixel_display(&resized));
-        println!("Grayscale:");
-        println!("{}", visualise::pixel_display(&gray));
+        let squashed_disp = visualise::pixel_display(&resized);
+        let gray_disp = visualise::pixel_display(&gray);
+
+        println!("Squash -> Grayscale");
+        for (squashed_disp, gray_disp) in squashed_disp.lines().zip(gray_disp.lines()) {
+            println!("{} | {}", squashed_disp, gray_disp);
+        }
     }
 
     // Calculate hash
