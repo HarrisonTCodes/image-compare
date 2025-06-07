@@ -1,10 +1,22 @@
 mod compare;
 mod hash;
 mod visualise;
+use clap::Parser;
+
+#[derive(Parser)]
+#[command(name = "image-compare")]
+struct Cli {
+    path1: String,
+    path2: String,
+
+    #[arg(short, long)]
+    visualise: bool,
+}
 
 fn main() {
-    let path1 = "../../../Downloads/test1.png";
-    let path2 = "../../../Downloads/test4.png";
-
-    println!("{}%", compare::compare_images(path1, path2, true));
+    let cli = Cli::parse();
+    println!(
+        "{}%",
+        compare::compare_images(&cli.path1, &cli.path2, cli.visualise)
+    )
 }
