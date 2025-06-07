@@ -2,6 +2,8 @@
 
 CLI Tool for comparing 2 images with the dHash algorithm, calculating their similarity based on the Hamming distance between hashes.
 
+![Example usage](./assets/example.png)
+
 ## Install and run
 
 To install and run the project, firstly clone it:
