@@ -17,3 +17,18 @@ pub fn pixel_display(img: &DynamicImage) -> String {
 
     disp
 }
+
+pub fn u64_fingerprint_display(fingerprint: &u64) -> String {
+    let mut disp = String::new();
+
+    for y in 0..8 {
+        for x in 0..8 {
+            let bit = ((fingerprint >> (x + y * 8)) & 1) as u8;
+            let pixel = if bit == 1 { "█" } else { " " };
+            disp.push_str(pixel);
+        }
+        disp.push_str("\n");
+    }
+
+    disp
+}
