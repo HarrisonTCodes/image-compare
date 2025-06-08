@@ -1,3 +1,4 @@
+use colored::*;
 use image::{DynamicImage, GenericImageView};
 
 pub fn pixel_display(img: &DynamicImage) -> String {
@@ -24,8 +25,12 @@ pub fn u64_fingerprint_display(fingerprint: &u64) -> String {
     for y in 0..8 {
         for x in 0..8 {
             let bit = ((fingerprint >> (x + y * 8)) & 1) as u8;
-            let pixel = if bit == 1 { "██" } else { "  " };
-            disp.push_str(pixel);
+            let pixel = if bit == 1 {
+                "1 ".bright_black().on_white().to_string()
+            } else {
+                "0 ".bright_black().to_string()
+            };
+            disp.push_str(&pixel);
         }
         disp.push('\n');
     }
