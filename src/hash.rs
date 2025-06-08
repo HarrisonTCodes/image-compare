@@ -26,12 +26,7 @@ pub fn dhash(img: &DynamicImage, visualise: bool) -> u64 {
         let gray_disp = visualise::pixel_display(&gray);
         let fingerprint_disp = visualise::u64_fingerprint_display(&hash);
 
-        println!(
-            "{}->{}->{}",
-            format!("{: <21}", "Squash"),
-            format!("{: <23}", "  Grayscale"),
-            format!("{: <23}", "  dHash"),
-        );
+        println!("{:<21}->{:<23}->{:<23}", "Squash", "  Grayscale", "  dHash");
         for (squashed_line, gray_line, fingerprint_line) in izip!(
             squashed_disp.lines(),
             gray_disp.lines(),
