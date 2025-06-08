@@ -9,7 +9,7 @@ pub fn pixel_display(img: &DynamicImage) -> String {
             let [r, g, b, _a] = pixel.0;
 
             // Draw pixel with RGB colour
-            disp.push_str(&format!("\x1b[38;2;{};{};{}m█", r, g, b));
+            disp.push_str(&format!("\x1b[38;2;{};{};{}m██", r, g, b));
         }
         // Reset colours for new line
         disp.push_str("\x1b[0m\n");
@@ -24,7 +24,7 @@ pub fn u64_fingerprint_display(fingerprint: &u64) -> String {
     for y in 0..8 {
         for x in 0..8 {
             let bit = ((fingerprint >> (x + y * 8)) & 1) as u8;
-            let pixel = if bit == 1 { "█" } else { " " };
+            let pixel = if bit == 1 { "██" } else { "  " };
             disp.push_str(pixel);
         }
         disp.push('\n');
