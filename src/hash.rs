@@ -37,6 +37,7 @@ pub fn dhash(img: &DynamicImage, visualise: bool) -> u64 {
                 squashed_line, gray_line, fingerprint_line
             );
         }
+        println!();
     }
 
     hash
