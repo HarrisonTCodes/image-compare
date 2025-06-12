@@ -64,7 +64,7 @@ pub fn ahash(img: &DynamicImage, visualise: bool) -> u64 {
         let gray_disp = visualise::pixel_display(&gray);
         let fingerprint_disp = visualise::u64_fingerprint_display(&hash);
 
-        println!("{:<21}->{:<23}->{:<23}", "Squash", "  Grayscale", "  aHash");
+        println!("{:<19}->{:<21}->{:<21}", "Squash", "  Grayscale", "  aHash");
         println!(
             "{}",
             visualise::join_displays(vec![squashed_disp, gray_disp, fingerprint_disp])
