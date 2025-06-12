@@ -1,6 +1,6 @@
 # image-compare
 
-CLI Tool for comparing 2 images with the dHash algorithm, calculating their similarity based on the Hamming distance between hashes.
+CLI Tool for comparing 2 images with hashing, calculating their similarity based on the Hamming distance between hashes.
 
 ![Example usage](./assets/example.png)
 
@@ -24,4 +24,10 @@ cargo install --path .
 
 # This should now work from anywhere
 image-compare --visualise path/to/image1.png path/to/image2.png
+```
+
+Use the `help` flag for more information:
+
+```bash
+image-compare --help
 ```
