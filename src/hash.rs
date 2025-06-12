@@ -1,6 +1,5 @@
 use crate::visualise;
 use image::{DynamicImage, GenericImageView, imageops::FilterType};
-use itertools::izip;
 
 pub fn dhash(img: &DynamicImage, visualise: bool) -> u64 {
     // Mutate image
@@ -27,17 +26,10 @@ pub fn dhash(img: &DynamicImage, visualise: bool) -> u64 {
         let fingerprint_disp = visualise::u64_fingerprint_display(&hash);
 
         println!("{:<21}->{:<23}->{:<23}", "Squash", "  Grayscale", "  dHash");
-        for (squashed_line, gray_line, fingerprint_line) in izip!(
-            squashed_disp.lines(),
-            gray_disp.lines(),
-            fingerprint_disp.lines()
-        ) {
-            println!(
-                "{}   |   {}   |   {}",
-                squashed_line, gray_line, fingerprint_line
-            );
-        }
-        println!();
+        println!(
+            "{}",
+            visualise::join_displays(vec![squashed_disp, gray_disp, fingerprint_disp])
+        )
     }
 
     hash
