@@ -1,3 +1,4 @@
+use crate::utils;
 use colored::*;
 use image::{DynamicImage, GenericImageView};
 
@@ -38,24 +39,11 @@ pub fn u64_fingerprint_display(fingerprint: &u64) -> String {
     disp
 }
 
-struct Multizip<T>(Vec<T>);
-
-impl<T> Iterator for Multizip<T>
-where
-    T: Iterator,
-{
-    type Item = Vec<T::Item>;
-
-    fn next(&mut self) -> Option<Self::Item> {
-        self.0.iter_mut().map(Iterator::next).collect()
-    }
-}
-
 pub fn join_displays(displays: Vec<String>) -> String {
     let mut joined = String::new();
     let display_lines = displays.iter().map(|display| display.lines()).collect();
 
-    for lines in Multizip(display_lines) {
+    for lines in utils::Multizip(display_lines) {
         let joined_lines = lines.join("   |   ");
         joined.push_str(&format!("{}\n", joined_lines));
     }

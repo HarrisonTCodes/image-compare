@@ -1,5 +1,6 @@
 mod compare;
 mod hash;
+mod utils;
 mod visualise;
 use clap::Parser;
 
