@@ -2,27 +2,11 @@ use crate::{hash, utils};
 use colored::*;
 
 pub fn compare_images(path1: &str, path2: &str, visualise: bool, algorithm: utils::Algorithm) {
-    // Get images
-    let img1 = image::open(path1).unwrap_or_else(|e| {
-        eprintln!("Error opening image {}: {}", path1, e);
-        std::process::exit(1);
-    });
-    let img2 = image::open(path2).unwrap_or_else(|e| {
-        eprintln!("Error opening image {}: {}", path2, e);
-        std::process::exit(1);
-    });
+    // Compute hashes
+    let hash1 = path_to_hash(path1, visualise, algorithm);
+    let hash2 = path_to_hash(path2, visualise, algorithm);
 
-    // Compute and output hashes
-    let hash1 = match algorithm {
-        utils::Algorithm::AHash => hash::ahash(&img1, visualise),
-
-        utils::Algorithm::DHash => hash::dhash(&img1, visualise),
-    };
-    let hash2 = match algorithm {
-        utils::Algorithm::AHash => hash::ahash(&img2, visualise),
-
-        utils::Algorithm::DHash => hash::dhash(&img2, visualise),
-    };
+    // Output hashes
     println!("{} {} fingerprint - {}", path1.bold(), algorithm, hash1);
     println!("{} {} fingerprint - {}", path2.bold(), algorithm, hash2);
 
@@ -58,4 +42,21 @@ pub fn compare_images(path1: &str, path2: &str, visualise: bool, algorithm: util
     }
 
     println!("{}", message)
+}
+
+fn path_to_hash(path: &str, visualise: bool, algorithm: utils::Algorithm) -> u64 {
+    // Get image from path
+    let img = image::open(path).unwrap_or_else(|e| {
+        eprintln!("Error opening image {}: {}", path, e);
+        std::process::exit(1);
+    });
+
+    // Compute and output hash
+    let hash = match algorithm {
+        utils::Algorithm::AHash => hash::ahash(&img, visualise),
+
+        utils::Algorithm::DHash => hash::dhash(&img, visualise),
+    };
+
+    hash
 }
