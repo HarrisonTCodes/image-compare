@@ -51,12 +51,9 @@ fn path_to_hash(path: &str, visualise: bool, algorithm: utils::Algorithm) -> u64
         std::process::exit(1);
     });
 
-    // Compute and output hash
-    let hash = match algorithm {
+    // Compute hash
+    match algorithm {
         utils::Algorithm::AHash => hash::ahash(&img, visualise),
-
         utils::Algorithm::DHash => hash::dhash(&img, visualise),
-    };
-
-    hash
+    }
 }
