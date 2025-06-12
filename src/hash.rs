@@ -41,10 +41,11 @@ pub fn ahash(img: &DynamicImage, visualise: bool) -> u64 {
     let gray = resized.grayscale();
 
     // Calculate average intensity
-    let mut intensities: Vec<u8> = vec![];
+    let mut intensities = [0u8; 64];
     for y in 0..8 {
         for x in 0..8 {
-            intensities.push(gray.get_pixel(x, y)[0]);
+            let i = x + y * 8;
+            intensities[i] = gray.get_pixel(x as u32, y as u32)[0];
         }
     }
     let avg_intensity =
