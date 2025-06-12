@@ -1,4 +1,4 @@
-use crate::hash;
+use crate::{hash, utils};
 use colored::*;
 
 pub fn compare_images(path1: &str, path2: &str, visualise: bool) {
@@ -19,7 +19,7 @@ pub fn compare_images(path1: &str, path2: &str, visualise: bool) {
     println!("{} dHash fingerprint - {}", path2.bold(), hash2);
 
     // Compute and output hamming distance
-    let dist = hash::hamming_distance(hash1, hash2);
+    let dist = utils::hamming_distance(hash1, hash2);
     let mut message = format!("Hamming distance {}/64 - ", dist);
 
     match dist {

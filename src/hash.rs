@@ -34,7 +34,3 @@ pub fn dhash(img: &DynamicImage, visualise: bool) -> u64 {
 
     hash
 }
-
-pub fn hamming_distance(a: u64, b: u64) -> u32 {
-    (a ^ b).count_ones()
-}

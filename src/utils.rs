@@ -10,3 +10,7 @@ where
         self.0.iter_mut().map(Iterator::next).collect()
     }
 }
+
+pub fn hamming_distance(a: u64, b: u64) -> u32 {
+    (a ^ b).count_ones()
+}
