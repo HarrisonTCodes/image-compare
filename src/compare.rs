@@ -1,7 +1,7 @@
 use crate::{hash, utils};
 use colored::*;
 
-pub fn compare_images(path1: &str, path2: &str, visualise: bool) {
+pub fn compare_images(path1: &str, path2: &str, visualise: bool, algorithm: utils::Algorithm) {
     // Get images
     let img1 = image::open(path1).unwrap_or_else(|e| {
         eprintln!("Error opening image {}: {}", path1, e);
@@ -13,10 +13,18 @@ pub fn compare_images(path1: &str, path2: &str, visualise: bool) {
     });
 
     // Compute and output hashes
-    let hash1 = hash::dhash(&img1, visualise);
-    let hash2 = hash::dhash(&img2, visualise);
-    println!("{} dHash fingerprint - {}", path1.bold(), hash1);
-    println!("{} dHash fingerprint - {}", path2.bold(), hash2);
+    let hash1 = match algorithm {
+        utils::Algorithm::AHash => hash::ahash(&img1, visualise),
+
+        utils::Algorithm::DHash => hash::dhash(&img1, visualise),
+    };
+    let hash2 = match algorithm {
+        utils::Algorithm::AHash => hash::ahash(&img2, visualise),
+
+        utils::Algorithm::DHash => hash::dhash(&img2, visualise),
+    };
+    println!("{} {} fingerprint - {}", path1.bold(), algorithm, hash1);
+    println!("{} {} fingerprint - {}", path2.bold(), algorithm, hash2);
 
     // Compute and output hamming distance
     let dist = utils::hamming_distance(hash1, hash2);
