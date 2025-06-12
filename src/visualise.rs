@@ -24,8 +24,10 @@ pub fn u64_fingerprint_display(fingerprint: &u64) -> String {
     let mut disp = String::new();
 
     for y in 0..8 {
+        let row = 7 - y;
         for x in 0..8 {
-            let bit = ((fingerprint >> (x + y * 8)) & 1) as u8;
+            let column = 7 - x;
+            let bit = ((fingerprint >> (column + row * 8)) & 1) as u8;
             let pixel = if bit == 1 {
                 "1 ".bright_black().on_white().to_string()
             } else {
