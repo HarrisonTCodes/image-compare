@@ -1,5 +1,10 @@
 # image-compare
 
+[![Rust](https://img.shields.io/badge/rust-stable-brightgreen)](https://www.rust-lang.org)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/HarrisonTCodes/image-compare/ci.yml?branch=main)](https://github.com/HarrisonTCodes/image-compare/actions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white)](https://conventionalcommits.org)
+
 CLI Tool for comparing 2 images with hashing, calculating their similarity based on the Hamming distance between hashes.
 
 ![Example usage](./assets/example.png)
